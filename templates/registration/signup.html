@@ -1,0 +1,11 @@
+
+<div class="container">
+    <h1>sign up</h1>
+
+    <form method="POST" action="{% url 'accounts:signup'%}">
+        {% csrf_token %}
+        {{userform.as_p}}
+        <input type="submit" value="sign up">
+    </form>
+   
+</div>

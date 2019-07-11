@@ -1,0 +1,37 @@
+
+<div style="text-align:center">
+<a href="{% url 'home' %}">홈으로</a>
+    <div>
+        <h1>{{post.title}}</h1>
+        <p>{{post.created_date}}</p>
+        <p>{{post.text}}</p>
+
+    </div>
+
+    <hr>
+
+    <p>댓글{{post.comments.count}}개</p>
+    <div class="form-group">
+        <h4>댓글 작성</h4>
+        <form method="POST" action="{% url 'add_comment' post.id %}">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="save btn btn-default">작성</button>
+            <hr>
+        </form>
+    </div>
+
+    {% for comment in post.comments.all%}
+    <div>
+        <br>
+        <div>{{comment.created_date}}</div>
+        <strong>{{comment.nickname}}</strong>
+        {{comment.text|linebreaks}}
+        <a href="{% url 'comment_delete' comment_id=comment.id %}" onclick="return confirm('정말로 삭제하시겠습니까?')">댓글 삭제</a>
+        <br>
+        <hr>
+    </div>
+    {% empty%}
+    <p>댓글이 없습니다</p>
+    {% endfor %}
+</div>

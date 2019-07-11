@@ -1,0 +1,7 @@
+
+    <h1>글 수정</h2>
+    <form method="POST">
+        {% csrf_token%}
+        {{form.as_p}}
+        <button type="submit">수정</butthon>
+    </form>
